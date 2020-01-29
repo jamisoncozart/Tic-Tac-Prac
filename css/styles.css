@@ -1,0 +1,13 @@
+body {
+  text-align: center;
+}
+
+form#form {
+  width: 50%;
+  margin: auto;
+}
+
+.panel {
+  border: 2px solid black;
+  height: 200px;
+}
