@@ -2,7 +2,6 @@ function Game(Board) {
   this.currentPlayer = 1;
   this.players = [];
   this.board = Board;
-  this.turn = 0;
 }
 
 Game.prototype.addPlayer = function(Player) {
@@ -27,46 +26,34 @@ function addPlayerIcon(currentPlayer, index, board) {
   }
 }
 
-function changeGameState(Game) {
-  var titlePlayer = $("#currentPlayer");
-  if(Game.currentPlayer === 1) {
-    Game.currentPlayer = 2;
-    titlePlayer.html("P2 (O) Turn")
-  } else if(Game.currentPlayer === 2) {
-    Game.currentPlayer = 1;
-    titlePlayer.html("P1 (X) Turn")
-  } else {
-    console.log("Error: Something went wrong in changeGameState()");
-  }
-}
-
-function determineWinner(icon) {
-  if(icon === "X") {
-    console.log("Player 1 wins!");
-  } else if(icon === "O") {
-    console.log("Player 2 wins!");
-  }
-}
-
 function checkForWinner(board) {
   if(board[0] === board[1] && board[1] === board[2]) {
     determineWinner(board[0]);
+    return true;
   } else if(board[0] === board[3] && board[3] === board[6]) {
     determineWinner(board[0]);
+    return true;
   } else if(board[1] === board[4] && board[4] === board[7]) {
     determineWinner(board[1]);
+    return true;
   } else if(board[2] === board[5] && board[5] === board[8]) {
     determineWinner(board[2]);
+    return true;
   } else if(board[3] === board[4] && board[4] === board[5]) {
     determineWinner(board[3]);
+    return true;
   } else if(board[6] === board[7] && board[7] === board[8]) {
     determineWinner(board[6]);
+    return true;
   } else if(board[0] === board[4] && board[4] === board[8]) {
     determineWinner(board[0]);
+    return true;
   } else if(board[2] === board[4] && board[4] === board[6]) {
     determineWinner(board[2]);
+    return true;
   } else {
     console.log("No Winner");
+    return false;
   }
 }
 
@@ -74,6 +61,32 @@ function checkForWinner(board) {
 function displayBoard(board) {
   for(let i = 0; i < 9; i++) {
     $("div#" + i).html(board[i]);
+  }
+}
+
+function changeGameState(Game) {
+  var titlePlayer = $("#currentPlayer");
+if(Game.currentPlayer === 1) {
+  Game.currentPlayer = 2;
+  titlePlayer.html("P2 (O) Turn")
+} else if(Game.currentPlayer === 2) {
+  Game.currentPlayer = 1;
+  titlePlayer.html("P1 (X) Turn")
+} else {
+  console.log("Error: Something went wrong in changeGameState()");
+  }
+}
+
+function resetGame(board) {
+  board = ["","","","","","","","",""];
+  displayBoard(board);
+}
+
+function determineWinner(icon) {
+  if(icon === "X") {
+    $("#winner").html("Player 1 Wins!");
+  } else if(icon === "O") {
+    $("#winner").html("Player 2 Wins!");
   }
 }
 
@@ -100,6 +113,9 @@ $(document).ready(function() {
         changeGameState(newGame);
         displayBoard(board);
         checkForWinner(board);
+        // if(checkForWinner(board)) {
+        //   resetGame();
+        // }
       })
     }
     console.log(board);
