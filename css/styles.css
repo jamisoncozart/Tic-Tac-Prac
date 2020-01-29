@@ -10,4 +10,6 @@ form#form {
 .panel {
   border: 2px solid black;
   height: 200px;
+  font-size: 60px;
+  font-weight: bold;
 }

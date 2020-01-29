@@ -1,5 +1,5 @@
 function Game(Board) {
-  this.currentPlayer = 2;
+  this.currentPlayer = 1;
   this.players = [];
   this.board = Board;
   this.turn = 0;
@@ -28,12 +28,45 @@ function addPlayerIcon(currentPlayer, index, board) {
 }
 
 function changeGameState(Game) {
+  var titlePlayer = $("#currentPlayer");
   if(Game.currentPlayer === 1) {
     Game.currentPlayer = 2;
+    titlePlayer.html("P2 (O) Turn")
   } else if(Game.currentPlayer === 2) {
     Game.currentPlayer = 1;
+    titlePlayer.html("P1 (X) Turn")
   } else {
     console.log("Error: Something went wrong in changeGameState()");
+  }
+}
+
+function determineWinner(icon) {
+  if(icon === "X") {
+    console.log("Player 1 wins!");
+  } else if(icon === "O") {
+    console.log("Player 2 wins!");
+  }
+}
+
+function checkForWinner(board) {
+  if(board[0] === board[1] && board[1] === board[2]) {
+    determineWinner(board[0]);
+  } else if(board[0] === board[3] && board[3] === board[6]) {
+    determineWinner(board[0]);
+  } else if(board[1] === board[4] && board[4] === board[7]) {
+    determineWinner(board[1]);
+  } else if(board[2] === board[5] && board[5] === board[8]) {
+    determineWinner(board[2]);
+  } else if(board[3] === board[4] && board[4] === board[5]) {
+    determineWinner(board[3]);
+  } else if(board[6] === board[7] && board[7] === board[8]) {
+    determineWinner(board[6]);
+  } else if(board[0] === board[4] && board[4] === board[8]) {
+    determineWinner(board[0]);
+  } else if(board[2] === board[4] && board[4] === board[6]) {
+    determineWinner(board[2]);
+  } else {
+    console.log("No Winner");
   }
 }
 
@@ -66,6 +99,7 @@ $(document).ready(function() {
         addPlayerIcon(newGame.currentPlayer, i, board);
         changeGameState(newGame);
         displayBoard(board);
+        checkForWinner(board);
       })
     }
     console.log(board);
