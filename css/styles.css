@@ -10,6 +10,15 @@ form#form {
 .panel {
   border: 2px solid black;
   height: 200px;
-  font-size: 60px;
+  font-size: 120px;
   font-weight: bold;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+#nameScreen, #mainScreen, #winnerScreen {
+  display: none;
+}
+

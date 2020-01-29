@@ -93,6 +93,8 @@ $(document).ready(function() {
   })
   $("form#form").submit(function(event) {
     event.preventDefault();
+    $("#mainScreen").show();
+    $("#winnerScreen").show();
     var board = ["","","","","","","","",""];
     var newGame = new Game(board);
     var p1Name = $("#name1").val();
