@@ -77,11 +77,6 @@ if(Game.currentPlayer === 1) {
   }
 }
 
-function resetGame(board) {
-  board = ["","","","","","","","",""];
-  displayBoard(board);
-}
-
 function determineWinner(icon) {
   if(icon === "X") {
     $("#winner").html("Player 1 Wins!");
@@ -113,11 +108,12 @@ $(document).ready(function() {
         changeGameState(newGame);
         displayBoard(board);
         checkForWinner(board);
-        // if(checkForWinner(board)) {
-        //   resetGame();
-        // }
       })
     }
-    console.log(board);
+    $("#resetButton").click(function(event) {
+      board = ["","","","","","","","",""];
+      displayBoard(board);
+      $("#winner").html("");
+    })
   })
 })
